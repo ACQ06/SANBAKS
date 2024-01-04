@@ -93,10 +93,26 @@ public class ItemRecipes extends AppCompatActivity {
             List<String> key = entry.getKey();
             List<String> value = entry.getValue();
 
-            String keyString = String.join(", ", key);
-            String valueString = String.join(", ", value);
+            StringBuilder combinations = new StringBuilder();
+            StringBuilder results = new StringBuilder();
 
-            itemRecipeCardsArrayList.add(new ItemRecipeCards(valueString, keyString));
+            for (int i = 0; i < key.size(); i++) {
+                combinations.append(key.get(i)).append("(").append(Utils.findItemEra(key.get(i))).append(")");
+
+                if (i < key.size() - 1) {
+                    combinations.append(", ");
+                }
+            }
+
+            for (int i = 0; i < value.size(); i++) {
+                results.append(value.get(i)).append("(").append(Utils.findItemEra(value.get(i))).append(")");
+
+                if (i < value.size() - 1) {
+                    results.append(", ");
+                }
+            }
+
+            itemRecipeCardsArrayList.add(new ItemRecipeCards(results.toString(), combinations.toString()));
         }
     }
 
@@ -109,15 +125,36 @@ public class ItemRecipes extends AppCompatActivity {
             List<String> key = entry.getKey();
             List<String> value = entry.getValue();
 
-            String keyString = String.join(", ", key);
-            String valueString = String.join(", ", value);
+            StringBuilder combinations = new StringBuilder();
+            StringBuilder results = new StringBuilder();
 
-            if (keyString.toLowerCase().contains(newText) || valueString.toLowerCase().contains(newText)) {
-                filteredList.add(new ItemRecipeCards(valueString, keyString));
+            for (int i = 0; i < key.size(); i++) {
+                combinations.append(key.get(i)).append("(").append(Utils.findItemEra(key.get(i))).append(")");
+
+                if (i < key.size() - 1) {
+                    combinations.append(", ");
+                }
+            }
+
+            for (int i = 0; i < value.size(); i++) {
+                results.append(value.get(i)).append("(").append(Utils.findItemEra(value.get(i))).append(")");
+
+                if (i < value.size() - 1) {
+                    results.append(", ");
+                }
+            }
+
+            if (combinations.toString().toLowerCase().contains(newText) || results.toString().toLowerCase().contains(newText)) {
+                filteredList.add(new ItemRecipeCards(results.toString(), combinations.toString()));
             }
         }
 
         ItemRecipeAdapter adapter = new ItemRecipeAdapter(this, filteredList);
         itemRecipes.setAdapter(adapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
     }
 }

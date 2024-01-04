@@ -31,6 +31,8 @@ public class Utils {
 
     public static String userName = "Guest";
 
+    public static ElementsCombination combinations = new ElementsCombination();
+
     public static String createSeparatedString(ArrayList<String> itemList) {
         StringBuilder result = new StringBuilder();
 

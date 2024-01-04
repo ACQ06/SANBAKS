@@ -92,4 +92,9 @@ public class AccountSetting extends AppCompatActivity {
         super.onStart();
         city_animation.start();
     }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
 }

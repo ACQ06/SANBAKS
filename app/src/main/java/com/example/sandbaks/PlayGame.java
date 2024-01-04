@@ -303,4 +303,9 @@ public class PlayGame extends AppCompatActivity {
 
         dropArea.setAdapter(adapter);
     }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
 }

@@ -12,6 +12,7 @@ public class EraUnlocker {
         db.initDB(MainActivity.context);
         String era = db.getUserEra(Utils.userID);
 
+        Utils.combinations.paleolithicAge();
         ArrayList<String> eras = Utils.getItemsFromString(era);
 
         if (eras.contains("Bronze")){
@@ -53,6 +54,7 @@ public class EraUnlocker {
             Toast.makeText(MainActivity.context, "Bronze Age Unlocked!", Toast.LENGTH_SHORT).show();
         }
 
+        Utils.combinations.BronzeAge();
         PlayGame.goalText.setText("Current Goal: Unlock Iron");
     }
 
@@ -70,6 +72,7 @@ public class EraUnlocker {
             Toast.makeText(MainActivity.context, "Iron Age Unlocked!", Toast.LENGTH_SHORT).show();
         }
 
+        Utils.combinations.IronAge();
         PlayGame.goalText.setText("Current Goal: Unlock Spaniards");
     }
 
@@ -87,6 +90,7 @@ public class EraUnlocker {
             Toast.makeText(MainActivity.context, "Spanish Era Unlocked!", Toast.LENGTH_SHORT).show();
         }
 
+        Utils.combinations.SpanishEra();
         PlayGame.goalText.setText("Current Goal: Unlock Education");
     }
 
@@ -104,6 +108,7 @@ public class EraUnlocker {
             Toast.makeText(MainActivity.context, "American Era Unlocked!", Toast.LENGTH_SHORT).show();
         }
 
+        Utils.combinations.AmericanEra();
         PlayGame.goalText.setText("Current Goal: Unlock Literature");
     }
 
@@ -121,6 +126,7 @@ public class EraUnlocker {
             Toast.makeText(MainActivity.context, "Japanese Era Unlocked!", Toast.LENGTH_SHORT).show();
         }
 
+        Utils.combinations.JapaneseEra();
         PlayGame.goalText.setText("Current Goal: Unlock Democracy");
     }
 
@@ -138,6 +144,7 @@ public class EraUnlocker {
             Toast.makeText(MainActivity.context, "Self Rule Era Unlocked!", Toast.LENGTH_SHORT).show();
         }
 
+        Utils.combinations.SelfRule();
         PlayGame.goalText.setText("Current Goal: Discover Other Elements");
     }
 }

@@ -105,8 +105,7 @@ public class ElementsCombination {
     void SpanishEra(){
         // End Goal
         combinations.put(Arrays.asList("School", "Teachers"), List.of("Education"));
-
-        combinations.put(Arrays.asList("Soldiers", "Spaniards"), List.of("Spanish Era"));
+        
         combinations.put(Arrays.asList("Nipa Leaf", "Wood"), List.of("Bahay Kubo"));
         combinations.put(Arrays.asList("Bahay Kubo", "Brick"), List.of("House"));
         combinations.put(Arrays.asList("Plants", "Curanderos"), List.of("Medicine"));

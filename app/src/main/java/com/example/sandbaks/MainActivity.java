@@ -87,4 +87,9 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.start();
         dbHelper.initDB(this);
     }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
 }

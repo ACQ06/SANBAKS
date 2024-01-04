@@ -96,4 +96,9 @@ public class AccountCreation extends AppCompatActivity {
                 startActivity(backHome);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
 }

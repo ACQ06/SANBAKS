@@ -58,7 +58,6 @@ public class DropAreaAdapter extends RecyclerView.Adapter<DropAreaAdapter.DropAr
     }
 
     public class DropAreaViewHolder extends RecyclerView.ViewHolder {
-
         ImageView itemIcon;
         TextView itemName;
 
@@ -68,6 +67,7 @@ public class DropAreaAdapter extends RecyclerView.Adapter<DropAreaAdapter.DropAr
 
             itemIcon = itemView.findViewById(R.id.itemIcon);
             itemName = itemView.findViewById(R.id.itemName);
+
 
 
             // Drag Item from sidebar to screen
@@ -86,17 +86,9 @@ public class DropAreaAdapter extends RecyclerView.Adapter<DropAreaAdapter.DropAr
 
                             // If an item already exists on the said screen position
                             if (!itemName.getText().equals(" ")) {
+                                
                                 // Combine
-                                ElementsCombination combinations = new ElementsCombination();
-                                combinations.paleolithicAge();
-                                combinations.BronzeAge();
-                                combinations.IronAge();
-                                combinations.SpanishEra();
-                                combinations.AmericanEra();
-                                combinations.JapaneseEra();
-                                combinations.SelfRule();
-
-                                List<String> result = combinations.getCombination(Utils.itemName, itemName.getText().toString());
+                                List<String> result = Utils.combinations.getCombination(Utils.itemName, itemName.getText().toString());
 
                                 if (result != null) {
 
