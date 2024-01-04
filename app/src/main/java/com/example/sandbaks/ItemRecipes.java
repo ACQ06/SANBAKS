@@ -36,15 +36,7 @@ public class ItemRecipes extends AppCompatActivity {
         itemRecipes = findViewById(R.id.itemRecipe);
         searchItemRecipes = findViewById(R.id.searchItem);
 
-        combinations.paleolithicAge();
-        combinations.BronzeAge();
-        combinations.IronAge();
-        combinations.SpanishEra();
-        combinations.AmericanEra();
-        combinations.JapaneseEra();
-        combinations.SelfRule();
-
-        allCombinations = combinations.getAllCombinations();
+        allCombinations = Utils.combinations.getAllCombinations();
 
         setupItemRecipes();
 

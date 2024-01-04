@@ -1,10 +1,12 @@
 package com.example.sandbaks;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -48,6 +50,10 @@ public class Utils {
         return result.toString();
     }
 
+    static Uri getVideoFromRaw(int filename){
+        return Uri.parse("android.resource://" + MainActivity.context.getPackageName() + "/" + filename);
+    }
+
     static ArrayList<String> getItemsFromString(String items) {
         if (items.isEmpty()) {
             return new ArrayList<>();
@@ -56,6 +62,7 @@ public class Utils {
         String[] elements = items.split("\\|"); // Needs to have "\\" because "|" is a special character
         return new ArrayList<>(Arrays.asList(elements));
     }
+
 
     public static Bitmap getBitmapFromAssets(String fileName) throws IOException {
         AssetManager assetManager = MainActivity.context.getAssets();

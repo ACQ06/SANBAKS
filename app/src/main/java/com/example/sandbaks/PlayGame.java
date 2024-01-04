@@ -2,16 +2,15 @@ package com.example.sandbaks;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,14 +21,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
-import java.io.IOException;
-import java.time.chrono.Era;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 public class PlayGame extends AppCompatActivity {
     public static Button stone, bronze, iron, spanish, american, japan, self, itemRecipe;
@@ -37,10 +35,13 @@ public class PlayGame extends AppCompatActivity {
     private static boolean openSidebar;
     private String currentMenu = "None";
     static LinearLayout sidebar;
-
-    public static TextView goalText;
-
+    public static TextView goalText, tutorialTitle, tutorialDescription, tapScreen;
     ArrayList<ItemCards> itemsOnScreen = new ArrayList<>();
+    VideoView video;
+    RelativeLayout tutorialLayout;
+    private int currentTutorial = 1;
+
+    DBHelper db = new DBHelper();
 
     // menu setup
     @Override
@@ -81,9 +82,58 @@ public class PlayGame extends AppCompatActivity {
 
     public void init() {
         goalText = findViewById(R.id.goalText);
+        video = findViewById(R.id.tutorialVideo);
+        tutorialLayout = findViewById(R.id.tutorialLayout);
+        tutorialLayout.setVisibility(View.INVISIBLE);
+
+        tutorialTitle = findViewById(R.id.tutorialTitle);
+        tutorialDescription = findViewById(R.id.tutorialDescription);
+
+        tapScreen = findViewById(R.id.tapScreen);
+        tapScreen.setVisibility(View.INVISIBLE);
+
         loadFragments();
         setupClickListeners();
+
+        db.initDB(this);
+
+
+        showTutorial(currentTutorial);
     }
+
+    void showTutorial(int tutorialNumber) {
+        ArrayList<String> items;
+        items = Utils.getItemsFromString(db.getStoneItems(Utils.userID));
+        if(items.size() > 7){
+            return;
+        }
+
+        switch (tutorialNumber) {
+            case 1:
+                showSpecificTutorial(R.raw.drag_element, "Place Elements on Screen",
+                        "Hold then Drag Elements from Sidebar to screen.");
+                break;
+            case 2:
+                showSpecificTutorial(R.raw.combine_elements, "Combine Elements",
+                        "Hold then Drag Elements from Sidebar to another element on the screen.");
+                break;
+            case 3:
+                showSpecificTutorial(R.raw.remove_element, "Remove Element",
+                        "Hold then Drag Elements from screen to the rightmost/leftmost side of the screen.");
+                break;
+            case 4:
+                showSpecificTutorial(R.raw.drag_screen, "Drag Screen",
+                        "Swipe the screen vertically to show more space/slot for the elements.");
+                break;
+
+            default:
+                tutorialLayout.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
+
+
 
     private void loadFragments() {
         // Load all fragments initially
@@ -302,6 +352,39 @@ public class PlayGame extends AppCompatActivity {
         DropAreaAdapter adapter = new DropAreaAdapter(this, itemsOnScreen);
 
         dropArea.setAdapter(adapter);
+    }
+
+    void showSpecificTutorial(int videoRawId, String title, String description) {
+        Uri uri = Utils.getVideoFromRaw(videoRawId);
+        tutorialTitle.setText(title);
+        tutorialDescription.setText(description);
+        video.setVideoURI(uri);
+
+        video.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                tutorialLayout.setVisibility(View.VISIBLE);
+                video.start();
+            }
+        });
+
+        video.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                video.seekTo(0);
+                video.start();
+                tapScreen.setVisibility(View.VISIBLE);
+                tutorialLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        tutorialLayout.setVisibility(View.INVISIBLE);
+                        // Show the next tutorial on click
+                        currentTutorial++;
+                        showTutorial(currentTutorial);
+                    }
+                });
+            }
+        });
     }
 
     @Override

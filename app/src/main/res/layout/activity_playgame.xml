@@ -9,12 +9,10 @@
     tools:context=".PlayGame">
 
     <!-- Space to drag elements and Goals-->
-
     <ImageButton
         android:id="@+id/logOutButton"
         android:layout_width="29dp"
         android:layout_height="35dp"
-
         android:background="#00D900FF"
         android:contentDescription="Exit Button"
         android:scaleType="centerInside"
@@ -28,7 +26,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:tint="#FFFFFF"
         tools:ignore="TouchTargetSizeCheck">
-
     </ImageButton>
 
     <LinearLayout
@@ -65,7 +62,6 @@
 
 
     <!-- SIDEBAR -->
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
@@ -218,9 +214,71 @@
         android:id="@+id/recipeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10sp"
         android:text="Recipes"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_margin="10sp"/>
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!--Tutorial View-->
+    <RelativeLayout
+        android:id="@+id/tutorialLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <VideoView
+                android:id="@+id/tutorialVideo"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/c00" />
+
+            <TextView
+                android:id="@+id/tutorialTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Title"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tutorialDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:text="Description"
+                android:textSize="16sp"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tapScreen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="textEnd"
+                android:text="Tap screen to continue..."
+                android:textSize="16sp"
+                android:textColor="#AFAFAF" />
+        </LinearLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

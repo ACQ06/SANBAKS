@@ -8,7 +8,6 @@ import java.util.List;
 
 public class ElementsCombination {
     private HashMap<List<String>, List<String>> combinations = new HashMap<>();
-
     public List<String> getCombination(String element1, String element2) {
 
         List<String> key = Arrays.asList(element1, element2);
