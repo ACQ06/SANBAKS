@@ -36,7 +36,6 @@ public class PlayGame extends AppCompatActivity {
     private String currentMenu = "None";
     static LinearLayout sidebar;
     public static TextView goalText, tutorialTitle, tutorialDescription, tapScreen;
-    ArrayList<ItemCards> itemsOnScreen = new ArrayList<>();
     VideoView video;
     RelativeLayout tutorialLayout;
     private int currentTutorial = 1;
@@ -249,6 +248,7 @@ public class PlayGame extends AppCompatActivity {
     }
 
     void logOut(){
+        Utils.itemsOnScreen = new ArrayList<>();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -343,13 +343,13 @@ public class PlayGame extends AppCompatActivity {
 
 
         for(int i=0; i<300; i++){
-            itemsOnScreen.add(
+            Utils.itemsOnScreen.add(
                     new ItemCards(
                             " ",
                             Utils.createEmptyBitmap()));
         }
 
-        DropAreaAdapter adapter = new DropAreaAdapter(this, itemsOnScreen);
+        DropAreaAdapter adapter = new DropAreaAdapter(this, Utils.itemsOnScreen);
 
         dropArea.setAdapter(adapter);
     }

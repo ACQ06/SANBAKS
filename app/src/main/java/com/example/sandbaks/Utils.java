@@ -1,7 +1,6 @@
 package com.example.sandbaks;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,10 +27,9 @@ public class Utils {
     public static Bitmap itemIcon;
     public static boolean wasOnScreen;
     public static int previousLocation = 0;
-
     public static int userID = -1;
-
     public static String userName = "Guest";
+    public static ArrayList<ItemCards> itemsOnScreen = new ArrayList<>();
 
     public static ElementsCombination combinations = new ElementsCombination();
 
